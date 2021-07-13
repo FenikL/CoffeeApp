@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 
-from app.model import Base
+from app.model.database import Base
+
 
 
 class Balance(Base):
