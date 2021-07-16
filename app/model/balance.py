@@ -1,15 +1,16 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.dialects.postgresql import UUID
+from uuid import uuid4
 
 from app.model.database import Base
 
 
-
 class Balance(Base):
     __tablename__ = 'balance'
-    id = Column(Integer, primary_key=True)
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
 
-    user_id = Column(Integer, ForeignKey('users.id'))
-    user = relationship('User', back_populates="balance")
+    user_id = Column(UUID(True), ForeignKey("users.id"), nullable=False)
+    user = relationship('User', back_populates="balance", lazy=True)
 
-    balance_items = relationship('BalanceItems', back_populates="balance", cascade="all, delete")
+    balance_items = relationship('BalanceItems', back_populates="balance", cascade="all, delete", lazy=True)
