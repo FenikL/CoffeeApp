@@ -5,6 +5,11 @@ from sqlalchemy.orm import Session
 
 from app.crud import user as user_crud
 from app.model import user as user_model
+from app.model import order as order_model
+from app.model import balance as balance_model
+from app.model import order_items as order_items_model
+from app.model import balance_items as balance_items_model
+from app.model import coffee as coffee_model
 from app.model import database
 from app.schemas import user as user_schema
 from app.model.database import SessionLocal, engine

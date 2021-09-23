@@ -12,7 +12,7 @@ class OrderItems(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     count = Column(Integer, nullable=False)
 
-    order_id = Column(Integer, ForeignKey("orders.id"), nullable=False)
+    order_id = Column(UUID(True), ForeignKey("orders.id"), nullable=False)
     order = relationship('Order', back_populates="items", lazy=True)
-    coffee_id = Column(Integer, ForeignKey("coffee.id"), nullable=False)
+    coffee_id = Column(UUID(True), ForeignKey("coffee.id"), nullable=False)
     coffee = relationship('Coffee', back_populates="order_items", lazy=True)

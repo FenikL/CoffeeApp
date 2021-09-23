@@ -16,4 +16,4 @@ class Coffee(Base):
     cost = Column(Float, nullable=False)
 
     balance_items = relationship('BalanceItems', back_populates="coffee", cascade="all, delete", lazy=True)
-    order_items = relationship('BalanceItems', back_populates="coffee", cascade="all, delete", lazy=True)
+    order_items = relationship('OrderItems', back_populates="coffee", cascade="all, delete", lazy=True)

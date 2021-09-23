@@ -15,5 +15,5 @@ class User(Base):
     name = Column(String(), nullable=False)
     last_name = Column(String(), nullable=False)
 
-    #orders = relationship('Order', back_populates="user", cascade="all, delete", lazy=True)
-    #balance = relationship('Balance', back_populates="user", uselist=False, cascade="all, delete", lazy=True)
+    orders = relationship('Order', back_populates="user", cascade="all, delete", lazy=True)
+    balance = relationship('Balance', back_populates="user", uselist=False, cascade="all, delete", lazy=True)
