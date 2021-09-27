@@ -1,1 +1,1 @@
-![Схема базы данных](https://github.com/FenikL/CoffeeApp/blob/master/Coffee%20project.drawio.pdf)
+![Схема базы данных](https://github.com/FenikL/CoffeeApp/blob/master/Coffee_project.png)
