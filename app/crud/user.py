@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from app.model import user as user_model
 from app.schemas import user as user_schema
@@ -13,7 +14,7 @@ def create_user(db: Session, user: user_schema.UserCreate):
     return db_user
 
 
-def get_user(db: Session, user_id: int):
+def get_user(db: Session, user_id: UUID):
     return db.query(user_model.User).filter(user_model.User.id == user_id).first()
 
 

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from uuid import UUID
 
 
 class CoffeeBase(BaseModel):
@@ -12,7 +13,7 @@ class CoffeeAdd(CoffeeBase):
 
 
 class Coffee(CoffeeBase):
-    id: int
+    id: UUID
 
     class Config:
         orm_mode = True

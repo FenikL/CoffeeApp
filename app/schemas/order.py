@@ -1,0 +1,34 @@
+from pydantic import BaseModel
+from datetime import datetime
+from uuid import UUID
+
+
+class OrderBase(BaseModel):
+    user_id: UUID
+
+
+class CreateOrder(OrderBase):
+    date: datetime
+
+
+class Order(OrderBase):
+    id: UUID
+
+    class Config:
+        orm_mode = True
+
+
+class OrderItemsBase(BaseModel):
+    order_id: UUID
+
+
+class AddOrderItems(OrderItemsBase):
+    coffee_id: UUID
+    count: int
+
+
+class OrderItems(OrderItemsBase):
+    id: UUID
+
+    class Config:
+        orm_mode = True

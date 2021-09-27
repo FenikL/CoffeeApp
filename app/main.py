@@ -2,9 +2,11 @@ from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from app.crud import user as user_crud
 from app.crud import coffee as coffee_crud
+from app.crud import order as order_crud
 from app.model import user as user_model
 from app.model import order as order_model
 from app.model import balance as balance_model
@@ -14,6 +16,7 @@ from app.model import coffee as coffee_model
 from app.model import database
 from app.schemas import user as user_schema
 from app.schemas import coffee as coffee_schema
+from app.schemas import order as order_schema
 from app.model.database import SessionLocal, engine
 
 database.Base.metadata.create_all(bind=engine)
@@ -45,7 +48,7 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 @app.get("/users/{user_id}", response_model=user_schema.User)
-def read_user(user_id: int, db: Session = Depends(get_db)):
+def read_user(user_id: UUID, db: Session = Depends(get_db)):
     db_user = user_crud.get_user(db, user_id=user_id)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
@@ -60,3 +63,6 @@ def add_coffee(coffee: coffee_schema.CoffeeAdd, db: Session = Depends(get_db)):
     return coffee_crud.add_coffee(db=db, coffee=coffee)
 
 
+@app.post("/orders/", response_model=order_schema.Order)
+def create_order(order: order_schema.CreateOrder, db: Session = Depends(get_db)):
+    return order_crud.create_order(db=db, order=order)
