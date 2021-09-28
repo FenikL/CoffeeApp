@@ -22,9 +22,14 @@ class OrderItemsBase(BaseModel):
     order_id: UUID
 
 
-class AddOrderItems(OrderItemsBase):
+class AddOrderItems(BaseModel):
     coffee_id: UUID
     count: int
+
+
+class GetItems(AddOrderItems):
+    class Config:
+        orm_mode = True
 
 
 class OrderItems(OrderItemsBase):

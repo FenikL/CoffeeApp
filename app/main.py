@@ -66,3 +66,20 @@ def add_coffee(coffee: coffee_schema.CoffeeAdd, db: Session = Depends(get_db)):
 @app.post("/orders/", response_model=order_schema.Order)
 def create_order(order: order_schema.CreateOrder, db: Session = Depends(get_db)):
     return order_crud.create_order(db=db, order=order)
+
+
+@app.get("/users/{user_id}/orders/", response_model=List[order_schema.Order])
+def get_orders_for_this_user(user_id: UUID, db: Session = Depends(get_db)):
+    orders = order_crud.get_orders_for_current_user(db=db, user_id=user_id)
+    return orders
+
+
+@app.post("/orders/{order_id}/items/", response_model=order_schema.OrderItems)
+def add_order_items(order_id: UUID, item: order_schema.AddOrderItems, db: Session = Depends(get_db)):
+    return order_crud.add_order_items(db=db, order_items=item, order_id=order_id)
+
+
+@app.get("/orders/{order_id}/items/", response_model=List[order_schema.GetItems])
+def get_order_items(order_id: UUID, db: Session = Depends(get_db)):
+    items = order_crud.get_order_items(db=db, order_id=order_id)
+    return items
