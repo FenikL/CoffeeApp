@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from uuid import UUID
 
 from app.model import coffee as coffee_model
 from app.schemas import coffee as coffee_schema
@@ -12,7 +13,7 @@ def add_coffee(db: Session, coffee: coffee_schema.CoffeeAdd):
     return db_coffee
 
 
-def get_coffee(db: Session, coffee_id: int):
+def get_coffee(db: Session, coffee_id: UUID):
     return db.query(coffee_model.Coffee).filter(coffee_model.Coffee.id == coffee_id).first()
 
 
