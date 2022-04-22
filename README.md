@@ -48,5 +48,5 @@ $ pip install -r requirements.txt
 4. Запускаем сервер:
 
 ```sh
-$ 
+$ uvicorn app.main:app --reload
 ```
